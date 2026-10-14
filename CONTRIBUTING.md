@@ -17,7 +17,7 @@ main ──●────────────●─────────
 3. 작은 단위로 커밋하고 push → PR 생성 (템플릿 자동 적용).
 4. 리뷰 → `[MUST]` 반영 → **Squash merge** → 브랜치 삭제.
 
-> 예외: DORA 워크플로우(`github-actions[bot]`)는 매주 `dora/` 보고서를 `main` 에 직접 커밋한다. 브랜치 보호 규칙에서 이 봇만 bypass 로 허용한다.
+> 예외: DORA 워크플로우(`github-actions[bot]`)는 매주 `dora/` 보고서를 `main` 에 직접 커밋한다. 개인 저장소는 Actions 봇을 보호 규칙 bypass 로 지정할 수 없어, 현재 `main` 보호 규칙(ruleset)은 **삭제·force push 차단**만 적용하고 PR 필수는 이 문서의 규칙으로 지킨다.
 
 ### 브랜치 이름
 
