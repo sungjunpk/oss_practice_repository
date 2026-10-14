@@ -1,0 +1,211 @@
+{
+  "repo": "sungjunpk/oss_practice_repository",
+  "generated_at": "2026-10-14T06:17:44.330027+00:00",
+  "last_7_days": {
+    "deployments": 1,
+    "deploys_per_week": 1.0,
+    "lead_time_hours": 0.0,
+    "mttr_hours": null,
+    "change_failure_rate": 0.0,
+    "incidents": 0,
+    "tiers": {
+      "deploys_per_week": "High",
+      "lead_time_hours": "Elite",
+      "mttr_hours": "N/A",
+      "change_failure_rate": "Elite"
+    },
+    "window": "2026-10-07 ~ 2026-10-14"
+  },
+  "weekly": [
+    {
+      "week_start": "2026-07-27",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-08-03",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-08-10",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-08-17",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-08-24",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-08-31",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-09-07",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-09-14",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-09-21",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-09-28",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-10-05",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-10-12",
+      "deployments": 1,
+      "deploys_per_week": 1.0,
+      "lead_time_hours": 0.0,
+      "mttr_hours": null,
+      "change_failure_rate": 0.0,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "High",
+        "lead_time_hours": "Elite",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "Elite"
+      }
+    }
+  ],
+  "deployments": [
+    {
+      "sha": "46d2a8fe2e6e7ab02cf6d2b61668c62d2ebb3fcc",
+      "at": "2026-10-14T06:16:45Z",
+      "lead_hours": [
+        0.0019444444444444444
+      ]
+    }
+  ],
+  "incidents": []
+}

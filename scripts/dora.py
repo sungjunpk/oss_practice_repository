@@ -118,13 +118,14 @@ def dashboard(weekly, path):
     for ax, (key, title, scale, bar) in zip(axes.flat, panels):
         ys = [w[key] * scale if w[key] is not None else float("nan") for w in weekly]
         if bar:
-            ax.bar(labels, ys, color=blue, width=0.6)
+            ax.bar(range(len(ys)), ys, color=blue, width=0.6)
         else:
-            ax.plot(labels, ys, color=blue, linewidth=2, marker="o", markersize=6)
+            ax.plot(range(len(ys)), ys, color=blue, linewidth=2, marker="o", markersize=6)
         latest = weekly[-1]
         val = "N/A" if latest[key] is None else f"{latest[key] * scale:g}"
         ax.set_title(f"{title}\nthis week: {val}  ·  {latest['tiers'][key]}",
                      loc="left", fontsize=11, color=ink)
+        ax.set_xticks(range(len(labels)), labels)
         ax.set_facecolor(surface)
         ax.grid(axis="y", color="#e5e4e0", linewidth=0.8)
         ax.set_axisbelow(True)
