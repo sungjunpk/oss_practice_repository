@@ -1,0 +1,54 @@
+name: DORA metrics
+
+on:
+  push:
+    branches: [main]          # main push = 배포 1건으로 기록
+  schedule:
+    - cron: "0 0 * * 1"       # 매주 월요일 09:00 KST — 주간 보고서 커밋
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+  issues: read
+
+concurrency:
+  group: dora
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # Lead Time 계산에 커밋 이력 전체 필요
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install matplotlib
+
+      - name: Collect DORA metrics
+        run: python scripts/dora.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload JSON artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dora-metrics-${{ github.run_number }}
+          path: dora/
+          retention-days: 90
+
+      - name: Commit weekly report
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dora/
+          git diff --cached --quiet && exit 0
+          git commit -m "DORA 주간 보고서 갱신 — $(date -u +%F)"
+          git pull --rebase
+          git push

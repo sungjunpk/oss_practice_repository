@@ -57,3 +57,22 @@
 - **과적합 / 미래 데이터 누수**: 시간순 train/validation/test 분리, walk-forward 검증.
 - **예측 성능 한계**: 시장은 노이즈가 커서 정확도가 낮을 수 있음 → 수익률뿐 아니라 리스크 지표로 평가하고, 결과가 부정적이어도 분석 자체를 산출물로 삼는다.
 - **API 제약**: 호출 제한·인증 이슈 → 초기에 모의투자 API 연동을 미리 테스트.
+
+---
+
+## DORA 지표 대시보드
+
+`.github/workflows/dora.yml` 이 `main` push 와 매주 월요일마다 [`scripts/dora.py`](scripts/dora.py) 를 실행해 DORA 4대 지표를 수집한다.
+
+![DORA dashboard](dora/dashboard.png)
+
+| 지표 | 수집 방법 |
+|---|---|
+| Deployment Frequency | `main` push 1회 = 배포 1건 (Actions 실행 이력) |
+| Lead Time for Changes | 배포에 포함된 커밋 작성 시각 → push 시각 (중앙값) |
+| Change Failure Rate | `incident` 라벨 이슈 수 / 배포 수 |
+| MTTR | `incident` 이슈 open → close 시간 (평균) |
+
+- 매 실행 결과는 JSON 아티팩트(`dora-metrics-<번호>`)로 Actions 에 90일 보관된다.
+- 매주 월요일 09:00(KST)에 [`dora/REPORT.md`](dora/REPORT.md)(주간 보고서), `dora/metrics.json`, `dora/dashboard.png` 가 자동 커밋된다.
+- 장애 기록: 이슈를 열고 `incident` 라벨을 붙인다 → 복구 후 닫으면 MTTR 에 반영.
