@@ -14,8 +14,9 @@ jobs:
         env:
           TITLE: ${{ github.event.pull_request.title }}   # env 로 넘겨 스크립트 인젝션 방지
         run: |
-          re='^(feat|fix|docs|refactor|test|chore|ci|perf)(\([a-z0-9-]+\))?!?: .+'
-          if [[ "$TITLE" =~ $re ]]; then
+          # 타입 추가 시 CONTRIBUTING.md 2절도 함께 수정
+          re='^(feat|fix|docs|refactor|test|chore|ci|perf|revert)(\([a-z0-9-]+\))?!?: .+'
+          if [[ "$TITLE" =~ $re || "$TITLE" == 'Revert "'* ]]; then   # GitHub Revert 버튼 기본 제목 허용
             echo "OK: $TITLE"
           else
             echo "::error::PR 제목이 Conventional Commits 형식이 아닙니다: '$TITLE'"
