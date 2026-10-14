@@ -1,0 +1,24 @@
+name: PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions: {}
+
+jobs:
+  conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Conventional Commits format
+        env:
+          TITLE: ${{ github.event.pull_request.title }}   # env 로 넘겨 스크립트 인젝션 방지
+        run: |
+          re='^(feat|fix|docs|refactor|test|chore|ci|perf)(\([a-z0-9-]+\))?!?: .+'
+          if [[ "$TITLE" =~ $re ]]; then
+            echo "OK: $TITLE"
+          else
+            echo "::error::PR 제목이 Conventional Commits 형식이 아닙니다: '$TITLE'"
+            echo "예) feat(data): 일봉 시세 수집 스크립트 추가 — CONTRIBUTING.md 참고"
+            exit 1
+          fi
