@@ -1,4 +1,2 @@
-# 경로별 리뷰 담당자 — 아래로 갈수록 우선. 팀원이 늘면 경로별로 나눠 적는다.
-*                  @sungjunpk
-/.github/          @sungjunpk
-/scripts/          @sungjunpk
+# 경로별 리뷰 담당자 — 아래 줄이 위 줄보다 우선. 담당자가 갈리면 경로별 줄을 추가한다.
+*  @sungjunpk
