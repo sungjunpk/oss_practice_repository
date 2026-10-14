@@ -1,0 +1,30 @@
+name: Feature
+description: 새 기능·작업 제안
+title: "[Feature] "
+labels: ["type:feature"]
+body:
+  - type: textarea
+    id: why
+    attributes:
+      label: 배경 / 목적
+      description: 왜 필요한가?
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 할 일
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건 (Definition of Done)
+    validations:
+      required: true
+  - type: dropdown
+    id: estimate
+    attributes:
+      label: 예상 크기 (Story Point)
+      options: ["1", "2", "3", "5", "8"]

@@ -1,0 +1,33 @@
+name: Bug
+description: 버그 신고 — 기대와 다르게 동작하는 것
+title: "[Bug] "
+labels: ["type:bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 현상
+      description: 무엇이 잘못됐나?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 재현 방법
+      placeholder: |
+        1. python scripts/... 실행
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 동작
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: 환경 / 로그
+      description: Python 버전, OS, 에러 메시지 등
+      render: text

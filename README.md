@@ -76,3 +76,16 @@
 - 매 실행 결과는 JSON 아티팩트(`dora-metrics-<번호>`)로 Actions 에 90일 보관된다.
 - 매주 월요일 09:00(KST)에 [`dora/REPORT.md`](dora/REPORT.md)(주간 보고서), `dora/metrics.json`, `dora/dashboard.png` 가 자동 커밋된다.
 - 장애 기록: 이슈를 열고 `incident` 라벨을 붙인다 → 복구 후 닫으면 MTTR 에 반영.
+
+---
+
+## 스프린트 운영 (칸반)
+
+- 보드: [DeepTrader Kanban](https://github.com/users/sungjunpk/projects/6) — `Backlog → To Do → In Progress → Review → Done`
+- 스프린트 = 마일스톤 2개 (Sprint 1: 10/14~10/27, Sprint 2: 10/28~11/10), 스토리 포인트 = 보드의 `Estimate` 필드
+- 이슈 템플릿: Bug / Feature (`.github/ISSUE_TEMPLATE/`)
+- 라벨: `type:*`(bug·feature·docs·chore) · `area:*`(data·model·backtest·infra) · `priority:*`(high·medium·low) · `incident`(DORA)
+- 구성 스크립트: [`scripts/setup_board.py`](scripts/setup_board.py) (재실행 안전)
+- 지표: `python scripts/sprint_metrics.py` → [`sprint/REPORT.md`](sprint/REPORT.md) (Cycle Time · Velocity · Burndown)
+
+![burndown](sprint/burndown.png)
