@@ -89,3 +89,10 @@
 - 지표: `python scripts/sprint_metrics.py` → [`sprint/REPORT.md`](sprint/REPORT.md) (Cycle Time · Velocity · Burndown)
 
 ![burndown](sprint/burndown.png)
+
+---
+
+## 협업 규칙
+
+- [기여 가이드](CONTRIBUTING.md) — Feature 브랜치 전략, Conventional Commits, PR 규칙
+- [리뷰 가이드](docs/REVIEW_GUIDE.md) — `[MUST]` / `[SHOULD]` 태그, 리뷰어 체크리스트
