@@ -36,7 +36,7 @@ main ──●────────────●─────────
 <type>(<scope>): <무엇> — <왜>
 ```
 
-- `type`: `feat` · `fix` · `docs` · `refactor` · `test` · `chore` · `ci` · `perf`
+- `type`: `feat` · `fix` · `docs` · `refactor` · `test` · `chore` · `ci` · `perf` · `revert` (GitHub Revert 버튼의 `Revert "..."` 제목도 허용)
 - `scope`(선택): `data` · `model` · `backtest` · `infra` · `github` · `dora` · `sprint`
 - 제목은 한국어 한 줄, 마침표 없음. 본문은 필요할 때만.
 - 호환되지 않는 변경은 `feat(model)!: ...` 처럼 `!` 를 붙이고 본문에 `BREAKING CHANGE:` 를 적는다.
