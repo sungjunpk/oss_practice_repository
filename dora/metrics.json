@@ -1,9 +1,9 @@
 {
   "repo": "sungjunpk/oss_practice_repository",
-  "generated_at": "2026-10-14T06:17:44.330027+00:00",
+  "generated_at": "2026-10-19T03:00:19.028479+00:00",
   "last_7_days": {
-    "deployments": 1,
-    "deploys_per_week": 1.0,
+    "deployments": 3,
+    "deploys_per_week": 3.0,
     "lead_time_hours": 0.0,
     "mttr_hours": null,
     "change_failure_rate": 0.0,
@@ -14,24 +14,9 @@
       "mttr_hours": "N/A",
       "change_failure_rate": "Elite"
     },
-    "window": "2026-10-07 ~ 2026-10-14"
+    "window": "2026-10-12 ~ 2026-10-19"
   },
   "weekly": [
-    {
-      "week_start": "2026-07-27",
-      "deployments": 0,
-      "deploys_per_week": 0.0,
-      "lead_time_hours": null,
-      "mttr_hours": null,
-      "change_failure_rate": null,
-      "incidents": 0,
-      "tiers": {
-        "deploys_per_week": "Low",
-        "lead_time_hours": "N/A",
-        "mttr_hours": "N/A",
-        "change_failure_rate": "N/A"
-      }
-    },
     {
       "week_start": "2026-08-03",
       "deployments": 0,
@@ -184,8 +169,8 @@
     },
     {
       "week_start": "2026-10-12",
-      "deployments": 1,
-      "deploys_per_week": 1.0,
+      "deployments": 3,
+      "deploys_per_week": 3.0,
       "lead_time_hours": 0.0,
       "mttr_hours": null,
       "change_failure_rate": 0.0,
@@ -196,6 +181,21 @@
         "mttr_hours": "N/A",
         "change_failure_rate": "Elite"
       }
+    },
+    {
+      "week_start": "2026-10-19",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
     }
   ],
   "deployments": [
@@ -204,6 +204,20 @@
       "at": "2026-10-14T06:16:45Z",
       "lead_hours": [
         0.0019444444444444444
+      ]
+    },
+    {
+      "sha": "da17cd4ab086037f6aa54f7a406e7625dc720ecc",
+      "at": "2026-10-14T06:17:55Z",
+      "lead_hours": [
+        0.0011111111111111111
+      ]
+    },
+    {
+      "sha": "998f4e3ab9ebad6bf2c094dc363ba8285b352493",
+      "at": "2026-10-14T06:28:44Z",
+      "lead_hours": [
+        0.0008333333333333334
       ]
     }
   ],
