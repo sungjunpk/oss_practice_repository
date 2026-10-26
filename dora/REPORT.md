@@ -1,15 +1,15 @@
 # DORA 주간 보고서
 
-> 자동 생성: 2026-10-19 03:00 UTC · `.github/workflows/dora.yml` · 원본 데이터 [`metrics.json`](metrics.json)
+> 자동 생성: 2026-10-26 02:56 UTC · `.github/workflows/dora.yml` · 원본 데이터 [`metrics.json`](metrics.json)
 
-## 이번 주 (2026-10-12 ~ 2026-10-19)
+## 이번 주 (2026-10-19 ~ 2026-10-26)
 
 | 지표 | 값 | 등급 |
 |---|---|---|
-| Deployment Frequency | 3회 (3/주) | High |
-| Lead Time for Changes (중앙값) | 0시간 | Elite |
+| Deployment Frequency | 0회 (0/주) | Low |
+| Lead Time for Changes (중앙값) | N/A | N/A |
 | MTTR (평균) | N/A | N/A |
-| Change Failure Rate | 0% (0건 / 3배포) | Elite |
+| Change Failure Rate | N/A (0건 / 0배포) | N/A |
 
 ![DORA dashboard](dashboard.png)
 
@@ -17,6 +17,7 @@
 
 | 주 시작일 | 배포 | Lead Time | MTTR | CFR |
 |---|---|---|---|---|
+| 2026-10-26 | 0 | N/A | N/A | N/A |
 | 2026-10-19 | 0 | N/A | N/A | N/A |
 | 2026-10-12 | 3 | 0h | N/A | 0% |
 | 2026-10-05 | 0 | N/A | N/A | N/A |
@@ -28,7 +29,6 @@
 | 2026-08-24 | 0 | N/A | N/A | N/A |
 | 2026-08-17 | 0 | N/A | N/A | N/A |
 | 2026-08-10 | 0 | N/A | N/A | N/A |
-| 2026-08-03 | 0 | N/A | N/A | N/A |
 
 ## 측정 정의
 - **배포**: `main` 브랜치 push 1회 (trunk-based). 워크플로우 실행 이력에서 수집.
