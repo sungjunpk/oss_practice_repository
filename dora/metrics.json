@@ -1,6 +1,6 @@
 {
   "repo": "sungjunpk/oss_practice_repository",
-  "generated_at": "2026-10-26T02:56:25.461757+00:00",
+  "generated_at": "2026-11-02T04:04:25.881585+00:00",
   "last_7_days": {
     "deployments": 0,
     "deploys_per_week": 0.0,
@@ -14,24 +14,9 @@
       "mttr_hours": "N/A",
       "change_failure_rate": "N/A"
     },
-    "window": "2026-10-19 ~ 2026-10-26"
+    "window": "2026-10-26 ~ 2026-11-02"
   },
   "weekly": [
-    {
-      "week_start": "2026-08-10",
-      "deployments": 0,
-      "deploys_per_week": 0.0,
-      "lead_time_hours": null,
-      "mttr_hours": null,
-      "change_failure_rate": null,
-      "incidents": 0,
-      "tiers": {
-        "deploys_per_week": "Low",
-        "lead_time_hours": "N/A",
-        "mttr_hours": "N/A",
-        "change_failure_rate": "N/A"
-      }
-    },
     {
       "week_start": "2026-08-17",
       "deployments": 0,
@@ -184,6 +169,21 @@
     },
     {
       "week_start": "2026-10-26",
+      "deployments": 0,
+      "deploys_per_week": 0.0,
+      "lead_time_hours": null,
+      "mttr_hours": null,
+      "change_failure_rate": null,
+      "incidents": 0,
+      "tiers": {
+        "deploys_per_week": "Low",
+        "lead_time_hours": "N/A",
+        "mttr_hours": "N/A",
+        "change_failure_rate": "N/A"
+      }
+    },
+    {
+      "week_start": "2026-11-02",
       "deployments": 0,
       "deploys_per_week": 0.0,
       "lead_time_hours": null,
