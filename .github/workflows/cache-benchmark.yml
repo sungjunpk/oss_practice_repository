@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   cold:
-    name: cold (${{ matrix.scenario }} #${{ matrix.n }})
+    name: cold (${{ matrix.scenario }} n=${{ matrix.n }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -40,15 +40,16 @@ jobs:
           extras: ${{ matrix.extras }}
 
   warm:
-    name: warm (${{ matrix.scenario }} #${{ matrix.n }})
+    name: warm (${{ matrix.scenario }} n=${{ matrix.n }})
     needs: prime
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        scenario: [small, large]
+        n: [1, 2, 3]
         include:
           - {scenario: small, extras: dev}
           - {scenario: large, extras: "dev,ml"}
-        n: [1, 2, 3]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-env

@@ -25,7 +25,7 @@ def jobs(run_id):
 def bench(run_id):
     rows = {}   # (extras, kind) -> [(step_sec, job_sec)]
     for j in jobs(run_id)["jobs"]:
-        m = re.match(r"(cold|warm) \((.+) #\d\)", j["name"])
+        m = re.match(r"(cold|warm) \((.+) n=\d\)", j["name"])
         if not m:
             continue
         step = next(s for s in j["steps"] if s["name"].startswith("Run ./.github/actions/setup-env"))
