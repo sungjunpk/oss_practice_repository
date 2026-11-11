@@ -13,11 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        scenario: [small, large]
+        scenario: [small, large, torch]
         n: [1, 2, 3]
         include:
           - {scenario: small, extras: dev}
           - {scenario: large, extras: "dev,ml"}
+          - {scenario: torch, extras: "dev,torch"}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-env
@@ -33,6 +34,7 @@ jobs:
         include:
           - {scenario: small, extras: dev}
           - {scenario: large, extras: "dev,ml"}
+          - {scenario: torch, extras: "dev,torch"}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-env
@@ -45,11 +47,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        scenario: [small, large]
+        scenario: [small, large, torch]
         n: [1, 2, 3]
         include:
           - {scenario: small, extras: dev}
           - {scenario: large, extras: "dev,ml"}
+          - {scenario: torch, extras: "dev,torch"}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-env
