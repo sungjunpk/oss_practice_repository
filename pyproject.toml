@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deeptrader"
+version = "0.1.0"
+description = "DeepTrader — 딥러닝 주식 자동매매(모의투자) 학기 프로젝트"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.setuptools]
+packages = ["deeptrader"]   # 저장소에 react/ 등 다른 디렉터리가 있어 명시
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["react"]   # 업스트림 사본은 린트하지 않는다
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
