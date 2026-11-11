@@ -1,0 +1,36 @@
+name: Weekly summary
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"   # 매주 월요일 09:00 KST
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          since=$(date -u -d '7 days ago' +%F)
+          r="$GITHUB_REPOSITORY"
+          opened=$(gh issue list -R "$r" --state all --search "created:>=$since" --json number --jq length)
+          closed=$(gh issue list -R "$r" --state closed --search "closed:>=$since" --json number --jq length)
+          prs=$(gh pr list -R "$r" --state merged --search "merged:>=$since" --json number --jq length)
+          breach=$(gh issue list -R "$r" --state open --label sla:breach --json number --jq length)
+          gh label create weekly-summary --color ededed -R "$r" 2>/dev/null || true
+          gh issue create -R "$r" --label weekly-summary --title "주간 요약 — $(date -u +%F)" --body "$(cat <<MD
+          기간: $since ~ $(date -u +%F)
+
+          | 항목 | 수 |
+          |---|---|
+          | 새 이슈 | $opened |
+          | 닫은 이슈 | $closed |
+          | 병합된 PR | $prs |
+          | SLA 위반(열림) | $breach |
+          MD
+          )"

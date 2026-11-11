@@ -1,0 +1,35 @@
+name: SLA tracking
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # 6시간마다
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+env:
+  SLA_HOURS: 48
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # 응답 = 자동응답 봇이 아닌 댓글 1개 이상. ponytail: 작성자 본인 댓글도 응답으로 셈 — 엄밀히 하려면 author 비교 추가
+      # ponytail: 최근 100건만 검사. 이슈가 그 이상 쌓이면 페이지네이션 추가
+      - name: Label issues without response past SLA
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create sla:breach --color b60205 --description "SLA 내 무응답" --repo "$GITHUB_REPOSITORY" 2>/dev/null || true
+          cutoff=$(date -u -d "$SLA_HOURS hours ago" +%FT%TZ)
+          gh issue list --repo "$GITHUB_REPOSITORY" --state open --limit 100 \
+            --json number,createdAt,author,labels,comments \
+            --jq ".[] | select(.createdAt < \"$cutoff\")
+                  | select(([.labels[].name] | index(\"sla:breach\")) | not)
+                  | select([.comments[] | select(.author.login != \"github-actions\")] | length == 0)
+                  | .number" \
+          | while read -r n; do
+              gh issue edit "$n" --repo "$GITHUB_REPOSITORY" --add-label sla:breach
+              gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "⏰ ${SLA_HOURS}시간 SLA 내 응답이 없어 \`sla:breach\` 로 표시했습니다."
+            done
