@@ -22,14 +22,18 @@ runs:
     - id: pip
       if: inputs.cache == 'true'
       shell: bash
-      run: echo "dir=$(pip cache dir)" >> "$GITHUB_OUTPUT"
+      env:
+        EXTRAS: ${{ inputs.extras }}
+      run: |
+        echo "dir=$(pip cache dir)" >> "$GITHUB_OUTPUT"
+        echo "slug=${EXTRAS//,/+}" >> "$GITHUB_OUTPUT"   # 캐시 키에는 쉼표를 쓸 수 없다
 
     - uses: actions/cache@v4
       if: inputs.cache == 'true'
       with:
         path: ${{ steps.pip.outputs.dir }}
-        key: pip-${{ runner.os }}-${{ runner.arch }}-${{ inputs.python }}-${{ inputs.extras }}-${{ hashFiles('pyproject.toml') }}
-        restore-keys: pip-${{ runner.os }}-${{ runner.arch }}-${{ inputs.python }}-${{ inputs.extras }}-
+        key: pip-${{ runner.os }}-${{ runner.arch }}-${{ inputs.python }}-${{ steps.pip.outputs.slug }}-${{ hashFiles('pyproject.toml') }}
+        restore-keys: pip-${{ runner.os }}-${{ runner.arch }}-${{ inputs.python }}-${{ steps.pip.outputs.slug }}-
 
     - if: inputs.extras != ''
       shell: bash
