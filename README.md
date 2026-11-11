@@ -89,3 +89,10 @@
 - 지표: `python scripts/sprint_metrics.py` → [`sprint/REPORT.md`](sprint/REPORT.md) (Cycle Time · Velocity · Burndown)
 
 ![burndown](sprint/burndown.png)
+
+---
+
+## 기여하기
+
+- [CONTRIBUTING.md](CONTRIBUTING.md) · [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [LICENSE](LICENSE) (MIT)
+- 문서: [Wiki](https://github.com/sungjunpk/oss_practice_repository/wiki) · [ADR](docs/adr/) · [라이선스 비교](docs/license-comparison.md) · [Inner Source 로드맵](docs/inner-source-roadmap.md)
