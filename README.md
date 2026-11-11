@@ -96,3 +96,4 @@
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) · [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [LICENSE](LICENSE) (MIT)
 - 문서: [Wiki](https://github.com/sungjunpk/oss_practice_repository/wiki) · [ADR](docs/adr/) · [라이선스 비교](docs/license-comparison.md) · [Inner Source 로드맵](docs/inner-source-roadmap.md)
+- CI: [`ci.yml`](.github/workflows/ci.yml) · [최적화 전후 리포트](perf/REPORT.md)
