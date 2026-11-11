@@ -15,93 +15,75 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # 변경 파일 감지 — 코드·CI 설정이 바뀐 경우에만 아래 파이프라인을 돌린다.
+  # 태그 push·수동 실행은 항상 전체 실행.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.f.outputs.code == 'true' || github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/') }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: f
+        with:
+          filters: |
+            code:
+              - 'deeptrader/**'
+              - 'tests/**'
+              - 'pyproject.toml'
+              - '.github/workflows/ci.yml'
+              - '.github/workflows/_*.yml'
+              - '.github/actions/**'
+
   lint:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: ./.github/actions/setup-env
         with:
-          python-version: "3.11"
-          cache: pip
-          cache-dependency-path: pyproject.toml
-      - run: pip install ruff
+          extras: dev
       - run: ruff check deeptrader tests   # ponytail: scripts/ 는 기존 스타일 위반이 많아 제외, 정리 후 포함
 
   test:
     needs: lint
-    name: test (${{ matrix.os }}, py${{ matrix.python }})
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python: ["3.10", "3.11", "3.12"]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-          cache: pip
-          cache-dependency-path: pyproject.toml
-      - run: pip install -e ".[dev]"
-      - run: pytest -v --junitxml=junit.xml
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: junit-${{ matrix.os }}-py${{ matrix.python }}
-          path: junit.xml
-          retention-days: 14
+        python: ["3.10", "3.11", "3.12", "3.13"]
+        include:
+          - os: ubuntu-22.04      # 이전 LTS 이미지에서도 최소 지원 버전 확인
+            python: "3.10"
+    uses: ./.github/workflows/_test.yml
+    with:
+      os: ${{ matrix.os }}
+      python: ${{ matrix.python }}
 
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: ./.github/actions/setup-env
         with:
-          python-version: "3.11"
-      - run: pip install build
-      - run: python -m build
+          extras: ""
+      - run: pip install build && python -m build
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
           retention-days: 30
 
+  # 선택적 배포: PR 은 배포 안 함 / main push → staging / v* 태그 → production + Release
   deploy:
     needs: build
-    if: github.event_name != 'pull_request'     # PR 에서는 배포하지 않는다 (Secrets 보호)
-    runs-on: ubuntu-latest
-    environment: staging
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     permissions:
-      contents: write                            # 태그 릴리스 생성용
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install built wheel and smoke test
-        run: |
-          pip install dist/*.whl
-          python -c "import deeptrader; print('deeptrader', deeptrader.__version__)"
-
-      - name: Deploy (Secrets 주입)
-        env:
-          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-        run: |
-          test -n "$DEPLOY_TOKEN" || { echo "DEPLOY_TOKEN 이 설정되지 않았습니다"; exit 1; }
-          echo "토큰 길이: ${#DEPLOY_TOKEN}"       # 값은 로그에 ***로 마스킹된다
-          echo "token=$DEPLOY_TOKEN"               # 마스킹 확인용
-          ls -l dist/
-          # ponytail: 실제 배포 대상(서버/PyPI)이 없어 여기까지만. 대상이 정해지면 이 단계에서 업로드한다.
-
-      - name: GitHub Release (태그 push 시)
-        if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --generate-notes
+      contents: write
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      environment: ${{ startsWith(github.ref, 'refs/tags/v') && 'production' || 'staging' }}
+      release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    secrets: inherit

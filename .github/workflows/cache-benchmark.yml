@@ -1,0 +1,49 @@
+# 수동 실행. pip 캐시 없음(cold) vs 있음(warm) 의 setup-env 단계 시간을 시나리오별 3회씩 측정한다.
+# 결과 집계: python scripts/cache_report.py bench <run_id>
+name: Cache benchmark
+
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  cold:
+    name: cold (${{ matrix.extras }} #${{ matrix.n }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        extras: [dev, "dev,ml"]
+        n: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          extras: ${{ matrix.extras }}
+          cache: "false"
+
+  prime:      # 캐시를 채우는 1회. 측정 대상 아님.
+    name: prime (${{ matrix.extras }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        extras: [dev, "dev,ml"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          extras: ${{ matrix.extras }}
+
+  warm:
+    name: warm (${{ matrix.extras }} #${{ matrix.n }})
+    needs: prime
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        extras: [dev, "dev,ml"]
+        n: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          extras: ${{ matrix.extras }}

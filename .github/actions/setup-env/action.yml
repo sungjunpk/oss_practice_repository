@@ -1,0 +1,36 @@
+name: setup-env
+description: Python 설치 + (선택) pip 캐시 + 프로젝트 설치. lint/test/build/benchmark 가 공유한다.
+
+inputs:
+  python:
+    description: Python 버전
+    default: "3.11"
+  extras:
+    description: "pip extras (예: dev, 'dev,ml'). 빈 값이면 프로젝트 설치를 생략한다"
+    default: dev
+  cache:
+    description: pip 캐시 사용 여부 ("true" | "false")
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python }}
+
+    - id: pip
+      if: inputs.cache == 'true'
+      shell: bash
+      run: echo "dir=$(pip cache dir)" >> "$GITHUB_OUTPUT"
+
+    - uses: actions/cache@v4
+      if: inputs.cache == 'true'
+      with:
+        path: ${{ steps.pip.outputs.dir }}
+        key: pip-${{ runner.os }}-${{ runner.arch }}-${{ inputs.python }}-${{ inputs.extras }}-${{ hashFiles('pyproject.toml') }}
+        restore-keys: pip-${{ runner.os }}-${{ runner.arch }}-${{ inputs.python }}-${{ inputs.extras }}-
+
+    - if: inputs.extras != ''
+      shell: bash
+      run: pip install -e ".[${{ inputs.extras }}]"

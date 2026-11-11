@@ -1,0 +1,29 @@
+# Reusable workflow — matrix 한 칸(OS × Python)의 테스트. ci.yml 이 matrix 로 호출한다.
+name: _test
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        type: string
+        required: true
+      python:
+        type: string
+        required: true
+
+jobs:
+  pytest:
+    name: pytest (${{ inputs.os }}, py${{ inputs.python }})
+    runs-on: ${{ inputs.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          python: ${{ inputs.python }}
+      - run: pytest -v --junitxml=junit.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: junit-${{ inputs.os }}-py${{ inputs.python }}
+          path: junit.xml
+          retention-days: 14

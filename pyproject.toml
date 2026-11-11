@@ -12,6 +12,7 @@ requires-python = ">=3.10"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
+ml = ["numpy>=1.26", "pandas>=2.1", "scikit-learn>=1.4"]   # 모델 단계에서 쓸 무거운 의존성 (캐시 벤치마크 대상)
 
 [tool.setuptools]
 packages = ["deeptrader"]   # 저장소에 react/ 등 다른 디렉터리가 있어 명시
